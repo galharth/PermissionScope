@@ -299,15 +299,15 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     @objc public func addPermission(permission: Permission, message: String) {
         assert(!message.isEmpty, "Including a message about your permission usage is helpful")
         assert(configuredPermissions.count < 3, "Ask for three or fewer permissions at a time")
-        assert(configuredPermissions.first { $0.type == permission.type }.isNil, "Permission for \(permission.type) already set")
+        if configuredPermissions.first { $0.type == permission.type }.isNil {
+            configuredPermissions.append(permission)
+            permissionMessages[permission.type] = message
         
-        configuredPermissions.append(permission)
-        permissionMessages[permission.type] = message
-        
-        if permission.type == .Bluetooth && askedBluetooth {
-            triggerBluetoothStatusUpdate()
-        } else if permission.type == .Motion && askedMotion {
-            triggerMotionStatusUpdate()
+            if permission.type == .Bluetooth && askedBluetooth {
+                triggerBluetoothStatusUpdate()
+            } else if permission.type == .Motion && askedMotion {
+                triggerMotionStatusUpdate()
+            }
         }
     }
 
