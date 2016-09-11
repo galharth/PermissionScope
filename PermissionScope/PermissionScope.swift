@@ -299,7 +299,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     @objc public func addPermission(permission: Permission, message: String) {
         assert(!message.isEmpty, "Including a message about your permission usage is helpful")
         assert(configuredPermissions.count < 3, "Ask for three or fewer permissions at a time")
-        if configuredPermissions.first { $0.type == permission.type }.isNil {
+        if (configuredPermissions.first { $0.type == permission.type }).isNil {
             configuredPermissions.append(permission)
             permissionMessages[permission.type] = message
         
