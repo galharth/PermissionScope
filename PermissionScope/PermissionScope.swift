@@ -332,7 +332,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
         case .LocationAlways, .LocationInUse:
             button.setTitle("Enable \(type.prettyDescription)".localized.uppercaseString, forState: .Normal)
         default:
-            button.setTitle("Allow \(type)".localized.uppercaseString, forState: .Normal)
+            button.setTitle("Hell Yeah!", forState: .Normal)
         }
         
         button.addTarget(self, action: Selector("request\(type)"), forControlEvents: .TouchUpInside)
